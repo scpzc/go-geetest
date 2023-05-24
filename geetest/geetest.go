@@ -17,7 +17,7 @@ var (
 	// DefaultGeetest is default Geetest
 	DefaultGeetest = &Geetest{}
 
-	sdk             = "github.com/rmanzoku/go-geetest"
+	sdk             = "github.com/scpzc/go-geetest"
 	apiURL          = "https://api.geetest.com"
 	registerHandler = "/register.php"
 	validateHandler = "/validate.php"
@@ -95,7 +95,7 @@ func (g *Geetest) PreProcess(userID string, newCaptcha bool, clientType string, 
 		res = new(RegisterResponse)
 		res.Success = 0
 		res.Challenge = g.makeFailChallenge()
-	}else{
+	} else {
 		res.Success = 1
 		res.Challenge = g.md5Encode(res.Challenge + g.PrivateKey)
 	}
@@ -135,10 +135,10 @@ func (g *Geetest) SuccessClientValidate(cv *ClientValidate, userID string, data 
 	return g.SuccessValidate(cv.GeetestChallenge, cv.GeetestValidate, cv.GeetestSeccode, userID, data, userInfo)
 }
 
-func (g *Geetest) FailValidate(challenge string, validate string) bool{
-	if g.md5Encode(challenge) == validate{
+func (g *Geetest) FailValidate(challenge string, validate string) bool {
+	if g.md5Encode(challenge) == validate {
 		return true
-	}else{
+	} else {
 		return false
 	}
 }
